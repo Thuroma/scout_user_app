@@ -1,0 +1,50 @@
+{% extends 'scout_app/base.html' %}
+{% block content %}
+
+<h2>Search by clicking an area on the map!</h2>
+
+<body>
+
+<div id="map"></div>
+
+<div>
+    <form action="{% url 'lat_long_search' %}" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="latitude-input">Latitude</label>
+            <input id="latitude-input" name="latitude" onkeydown="event.preventDefault()" required autocomplete="off" value="{{ class_latitude }}">
+            
+            <label for="longitude-input">Longitude</label>
+            <input id="longitude-input" name="longitude" onkeydown="event.preventDefault()" required autocomplete="off" value="{{ class_longitude }}">
+            
+            <input type="submit" id="scout-button" class="btn btn-primary" name="lat_long_search" value="Scout">
+        </div>
+    </form>
+</div>
+
+<h2>Or, by entering an address below!</h2>
+
+<form action="{% url 'new_search' %}" method="post">
+    {% csrf_token %}
+    <table>
+        {{ new_search_form }}
+    </table>
+
+    <input type="submit" id="scout-button" class="btn btn-primary" name="address_search" value="Scout">
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+        let map = createMap([37.09024, -95.712891], 4)
+    });
+
+    document.getElementById("map")
+
+</script>
+
+{% endblock %}

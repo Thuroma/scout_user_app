@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scout!</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Leaflet script and CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+
+        <!-- FONTS -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Josefin+Sans&family=Raleway&family=Roboto&display=swap" rel="stylesheet">
+        
+        <!-- STYLES -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/teal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/cyan.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/sage.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/green.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/red.css" />
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/tealDark.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/cyanDark.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/sageDark.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/greenDark.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/redDark.css" />
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+        <link rel="icon" type="image/png" href="{% static 'images/map_icons/shop_map_icon.png' %}">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+        <!-- Load an icon library for navbar icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <script src="{% static 'js/leaflet_map.js' %}"></script>
+
+
+    </head>
+
+    <body>
+    <div class="jumbotron jumbotron-fluid" id="main-header">
+    <div class="header">
+        <h1 class="display-4">Scout</h1>
+    </div>
+    </div>
+        
+    <div class="topnav" id="topnav">
+        <a class="nav-link" href="{% url 'new_search' %}"><i class="fa fa-fw fa-home"></i>New Search</a>
+        <a class="nav-link" href="{% url 'bookmarked_searches' %}"><i class="fa fa-fw fa-search"></i>Bookmarked Searches</a>
+        <a class="nav-link" href="#ABOUT"><i class="fa fa-fw fa-question"></i>About</a>
+        <a class="nav-link split" href="#LOGIN"><i class="fa fa-fw fa-user"></i>Log In</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+
+    <div class="container" id="messages">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+
+    <hr>
+
+    {% block scripts %}
+    {% endblock %}
+
+    <div class="container">
+        <p>Icons by <a target="_blank" href="https://icons8.com">Icons8</a></p>
+    </div>
+
+    </body>
+
+</html>
